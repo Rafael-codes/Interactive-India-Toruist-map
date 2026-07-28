@@ -1,54 +1,50 @@
-# India Map
+# Nexus-India (summa.html)
 
-A simple India Tourist Planner built using HTML, CSS, and JavaScript. This project allows users to explore different Indian states through an interactive SVG map.
-
----
+Interactive India tourist planner that lets you explore Indian states/UTs via an SVG map.
 
 ## Features
+- Click a highlighted region on the map to open a “Sector” panel.
+- Displays curated **places** per region with a classification label.
+- Filters:
+  - **Zone type** (Coastal / Elevated / Mystic / Legacy)
+  - **Budget** (Eco / Standard / Premium)
+- Search by state/UT name.
+- Hover tooltip shows the selected state name.
 
-* Interactive India map
-* Clickable states and UTs
-* Tourist place suggestions
-* Search states by name
-* Budget filters
-* Zone/category filters
-* Google Maps integration
+## How it works
+- `statesData` maps SVG region ids (e.g. `IN-KA`) to:
+  - `name`
+  - `budget` (`low | medium | high`)
+  - `type` (array like `['beach']`, `['hill']`, `['spiritual']`, `['historical']`)
+  - `places[]` (name + type)
+  - `img` (one of the `img*.avif` assets)
+- Every `<path>` inside the embedded `<svg>` is treated as a clickable region.
+- UI logic:
+  - `showPlaces(code)` renders place cards inside `#placesList`
+  - `applyFilters()` hides/shows regions and applies a highlight style
+  - `searchStates()` filters regions by name as you type
 
----
+## Folder / assets
+- `summa.html` (single-file app)
+- `img1.avif` … `img8.avif` (used by `statesData` entries)
 
-## Technologies Used
+## Usage
+1. Open `summa.html` in a browser.
+2. Optionally use:
+   - **All Zones / Coastal / Elevated / Mystic / Legacy**
+   - **Budget / Eco / Standard / Premium**
+   - **Search** to locate a state
+3. Click any visible region.
+4. In the side panel, click **INITIATE SCAN** to open a Google Maps search for the selected place.
 
-* HTML
-* CSS
-* JavaScript
-* SVG Map
+## Notes / limitations
+- The SVG map is embedded directly in the HTML.
+- `statesData` contains entries for many states/UTs; only ids present in `statesData` will respond to interactions.
+- Filtering uses `data.type.includes(type)` and `data.budget === budget`.
 
----
+## Tech stack
+- HTML + inline CSS
+- Vanilla JavaScript
+- SVG for the map
+- Google Fonts (Rajdhani)
 
-## Main Functionalities
-
-* Users can click states on the map
-* Tourist places are displayed in a side panel
-* Users can filter places based on:
-
-  * Budget
-  * Zone type
-* Search feature helps locate states quickly
-* Google Maps search opens for selected places
-
----
-
-## Future Improvements
-
-* Add more tourist places
-* Improve UI design
-* Add dark mode
-* Add hotel and weather information
-* Add mobile responsiveness
-
----
-
-## Credits
-
-- India SVG Map sourced from: (http://amcharts.com/svg-maps/?map=india)
-- Some design inspiration and assets were referenced from online sources.
